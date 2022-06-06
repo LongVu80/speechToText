@@ -31,8 +31,8 @@ recognition.onresult = function (e) {
         textbox.val(content)
     }
 
-    content +=  transcript
-        textbox.val(content)
+    // content +=  transcript
+    //     textbox.val(content)
 
     setTimeout(() => {
         recognition.start();
@@ -55,7 +55,7 @@ $("#start-btn").click(function(e) {
 
 $("#clear").click(function () {
     textbox.val("");
-    // $("#start").html("Start Recording")
+    location.reload()
   });
 
 textbox.on('input', function () {
