@@ -22,13 +22,21 @@ recognition.onerror = function () {
 }
 
 recognition.onresult = function (e) {
-    let current = e.resultIndex;
+    const current = e.resultIndex;
 
     let transcript = e.results[current][0].transcript
+    let  = (current == 1 && transcript == e.results[0][0].transcript);
+    if(!mobileRepeatBug){
+        content +=  transcript
 
-    content +=  transcript
+        textbox.val(content)
+    }
 
-    textbox.val(content)
+    
+
+    setTimeout(() => {
+        recognition.start();
+      }, 50);
 }
 
 $("#start-btn").click(function(e) {
