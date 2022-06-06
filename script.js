@@ -5,7 +5,7 @@ let textbox = $("#textbox")
 
 let instructions = $("#instructions")
 
-let content = ''
+let content = '';
 
 recognition.continuous = true;
 
@@ -40,16 +40,18 @@ recognition.onresult = function (e) {
 }
 
 $("#start-btn").click(function(e) {
-    if ($(this).text() == "Stop Recording") {
-        $(this).html("Start Recording");
+    if ($(this).text() == "Stop") {
+        $(this).html("Start");
         $("#instructions").html("Press the Start Button");
         recognition.stop();
       } else {
-    $(this).html("Stop Recording")
+    $(this).html("Stop")
     if(content.length) {
         content += ''
     }
-    recognition.start()
+    setTimeout(() => {
+        recognition.start();
+      }, 50);
 }
 })
 
