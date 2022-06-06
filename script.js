@@ -22,17 +22,17 @@ recognition.onerror = function () {
 }
 
 recognition.onresult = function (e) {
-    const current = e.resultIndex;
+    let current = e.resultIndex;
 
     let transcript = e.results[current][0].transcript
-    let  = (current == 1 && transcript == e.results[0][0].transcript);
-    if(!mobileRepeatBug){
-        content +=  transcript
+    // let  = (current == 1 && transcript == e.results[0][0].transcript);
+    // if(!mobileRepeatBug){
+    //     content +=  transcript
+    //     textbox.val(content)
+    // }
 
+    content +=  transcript
         textbox.val(content)
-    }
-
-    
 
     setTimeout(() => {
         recognition.start();
