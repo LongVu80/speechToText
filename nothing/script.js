@@ -1,12 +1,11 @@
-let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+let SpeechRecognition = window.webkitSpeechRecognition
 let recognition = new SpeechRecognition()
 
 let textbox = $("#textbox")
 
 let instructions = $("#instructions")
 
-let content = ''
-recognition.interimResults = true;
+let content = '';
 
 recognition.continuous = true;
 
@@ -15,7 +14,7 @@ recognition.onstart = function() {
 }
 
 recognition.onspeechend = function() {
-    instructions.text("Voice Recognition is off due to No Activity or Stop Button pressed.")
+    instructions.text("Voice Recognition is off due to No Activity or Stop. Please press Start Button again")
 }
 
 recognition.onerror = function () {
@@ -23,42 +22,36 @@ recognition.onerror = function () {
 }
 
 recognition.onresult = function (e) {
-    e.preventDefault()
     let current = e.resultIndex;
-    let interim = ''
+
     let transcript = e.results[current][0].transcript
     let mobileRepeatBug = (current == 1 && transcript == e.results[0][0].transcript);
     if(!mobileRepeatBug){
-        for (let i = e.resultIndex; i < e.results.length; ++i) {
-            
-        if (e.results[i].isFinal) {
         content +=  transcript
-        } else {
-            interim += transcript
-        }
+        textbox.val(content)
     }
-    }
-    textbox.val(content + interim)
 
-    // setTimeout(() => {
-    //     recognition.start();
-    //   }, 50);
+    // content +=  transcript
+    //     textbox.val(content)
+
+    setTimeout(() => {
+        recognition.start();
+      }, 50);
 }
 
 $("#start-btn").click(function(e) {
-    if ($(this).text() == "Stop Recording") {
-        $(this).html("Start Recording");
+    if ($(this).text() == "Stop") {
+        $(this).html("Start");
         $("#instructions").html("Press the Start Button");
         recognition.stop();
       } else {
-    $(this).html("Stop Recording")
+    $(this).html("Stop")
     if(content.length) {
         content += ''
     }
-    // if(interim.length) {
-    //     interim += ''
-    // }
-    recognition.start()
+    setTimeout(() => {
+        recognition.start();
+      }, 50);
 }
 })
 
@@ -68,6 +61,5 @@ $("#clear").click(function () {
   });
 
 textbox.on('input', function () {
-    // interim = $(this).val()
     content = $(this).val()
 })
