@@ -1,5 +1,5 @@
 window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
-let recognition = new SpeechRecognition()
+let recognition = new window.SpeechRecognition()
 
 let textbox = $("#textbox")
 
