@@ -33,7 +33,7 @@ recognition.onresult = function (e) {
 
     setTimeout(() => {
         recognition.start();
-      }, 50);
+      }, 50000);
 }
 
 $("#start-btn").click(function(e) {
