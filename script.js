@@ -13,7 +13,7 @@ recognition.onstart = function() {
     instructions.text("Voice Recognition is on")
 }
 
-recognition.onspeechend = function() {
+recognition.onend = function() {
     instructions.text("Voice Recognition is off due to No Activity or Stop. Please press Start Button again")
 }
 
