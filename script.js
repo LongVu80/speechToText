@@ -23,12 +23,14 @@ recognition.onerror = function () {
 }
 
 recognition.onresult = function (e) {
+    e.preventDefault()
     let current = e.resultIndex;
     let interim = ''
     let transcript = e.results[current][0].transcript
     let mobileRepeatBug = (current == 1 && transcript == e.results[0][0].transcript);
     if(!mobileRepeatBug){
         for (let i = e.resultIndex; i < e.results.length; ++i) {
+            
         if (e.results[i].isFinal) {
         content +=  transcript
         } else {
@@ -38,9 +40,9 @@ recognition.onresult = function (e) {
     }
     textbox.val(content + interim)
 
-    setTimeout(() => {
-        recognition.start();
-      }, 50);
+    // setTimeout(() => {
+    //     recognition.start();
+    //   }, 50);
 }
 
 $("#start-btn").click(function(e) {
