@@ -31,9 +31,9 @@ recognition.onresult = function (e) {
         textbox.val(content)
     }
 
-    // setTimeout(() => {
+    setTimeout(() => {
         recognition.start();
-    //   }, 50);
+      }, 50);
 }
 
 $("#start-btn").click(function(e) {
