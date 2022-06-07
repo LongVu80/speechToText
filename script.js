@@ -1,4 +1,4 @@
-let SpeechRecognition = window.webkitSpeechRecognition
+window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
 let recognition = new SpeechRecognition()
 
 let textbox = $("#textbox")
@@ -31,12 +31,9 @@ recognition.onresult = function (e) {
         textbox.val(content)
     }
 
-    // content +=  transcript
-    //     textbox.val(content)
-
-    setTimeout(() => {
+    // setTimeout(() => {
         recognition.start();
-      }, 50);
+    //   }, 50);
 }
 
 $("#start-btn").click(function(e) {
@@ -49,9 +46,9 @@ $("#start-btn").click(function(e) {
     if(content.length) {
         content += ''
     }
-    setTimeout(() => {
+    // setTimeout(() => {
         recognition.start();
-      }, 50);
+    //   }, 50);
 }
 })
 
