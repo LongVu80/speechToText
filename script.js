@@ -1,4 +1,4 @@
-let SpeechRecognition = window.webkitSpeechRecognition
+let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 let recognition = new SpeechRecognition()
 
 let textbox = $("#textbox")
@@ -13,9 +13,9 @@ recognition.onstart = function() {
     instructions.text("Voice Recognition is on")
 }
 
-// recognition.onspeechend = function() {
-//     instructions.text("No Activity")
-// }
+recognition.onspeechend = function() {
+    instructions.text("Voice Recognition is off due to No Activity or Stop Button pressed.")
+}
 
 recognition.onerror = function () {
     instructions.text("Try Again")
