@@ -6,6 +6,7 @@ let textbox = $("#textbox")
 let instructions = $("#instructions")
 
 let content = ''
+recognition.interimResults = true;
 
 recognition.continuous = true;
 
@@ -23,16 +24,19 @@ recognition.onerror = function () {
 
 recognition.onresult = function (e) {
     let current = e.resultIndex;
-
+    let interim = ''
     let transcript = e.results[current][0].transcript
     let mobileRepeatBug = (current == 1 && transcript == e.results[0][0].transcript);
     if(!mobileRepeatBug){
+        for (let i = e.resultIndex; i < e.results.length; ++i) {
+        if (e.results[i].isFinal) {
         content +=  transcript
-        textbox.val(content)
+        } else {
+            interim += transcript
+        }
     }
-
-    // content +=  transcript
-    //     textbox.val(content)
+    }
+    textbox.val(content + interim)
 
     setTimeout(() => {
         recognition.start();
@@ -49,6 +53,9 @@ $("#start-btn").click(function(e) {
     if(content.length) {
         content += ''
     }
+    // if(interim.length) {
+    //     interim += ''
+    // }
     recognition.start()
 }
 })
@@ -59,5 +66,6 @@ $("#clear").click(function () {
   });
 
 textbox.on('input', function () {
+    // interim = $(this).val()
     content = $(this).val()
 })
