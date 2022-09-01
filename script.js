@@ -2,6 +2,7 @@ let SpeechRecognition = window.webkitSpeechRecognition
 let recognition = new SpeechRecognition()
 
 let textbox = $("#textbox")
+let textbox2 = $('#textbox2')
 
 let instructions = $("#instructions")
 
@@ -14,11 +15,11 @@ recognition.onstart = function() {
 }
 
 recognition.onend = function() {
-    instructions.text("Voice Recognition is off due to No Activity or Stop. Please press Start Button again")
+    recognition.start()
 }
 
 recognition.onerror = function () {
-    instructions.text("Try Again")
+    instructions.text("Sorry, this Web Platform does not support Google Speech Regconition. Please use keyboard microphone. With keyboard microphone, you can even use your native language.")
 }
 
 recognition.onresult = function (e) {
@@ -32,7 +33,7 @@ recognition.onresult = function (e) {
     }
 
     // content +=  transcript
-    //     textbox.val(content)
+        // textbox2.val(content)
 
     setTimeout(() => {
         recognition.start();
@@ -63,3 +64,27 @@ $("#clear").click(function () {
 textbox.on('input', function () {
     content = $(this).val()
 })
+
+
+
+// textbox2.on(content)
+
+// document.querySelector('#textbox').addEventListener('input', function(e){
+//     document.querySelector('#textbox2').innerHTML = `<strong class="text-light notranslate">Translation:</strong> <div class="form-control bg-dark text-light" style="border: 1px solid gray; border-radius: 8px;">${e.target.value}</div>`
+//   })
+
+
+
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  }
+
+// $(document).ready(function(){
+
+//     $('#trans').click(function() {
+//      google.language.translate($('#textbox').html(), 'en',  function(result)         
+//      {
+//         $('#textbox').html(result.translation);
+//      });
+//     });
+//    });
